@@ -1,2 +1,3 @@
-sasl_passwd
-
+configs/sasl_passwd
+configs/id_rsa
+data/sftp/*
