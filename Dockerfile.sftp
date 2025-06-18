@@ -1,0 +1,20 @@
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y openssh-server && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -s /bin/bash sftpuser && \
+    mkdir -p /home/sftpuser/.ssh /home/sftpuser/uploads /run/sshd && \
+    chown root:root /home/sftpuser /home/sftpuser/uploads && \
+    chmod 755 /home/sftpuser /home/sftpuser/uploads && \
+    chown sftpuser:sftpuser /home/sftpuser/.ssh && \
+    chmod 700 /home/sftpuser/.ssh && \
+    chmod 755 /run/sshd
+
+COPY configs/authorized_keys /home/sftpuser/.ssh/authorized_keys
+RUN chown sftpuser:sftpuser /home/sftpuser/.ssh/authorized_keys && \
+    chmod 600 /home/sftpuser/.ssh/authorized_keys
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]

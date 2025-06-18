@@ -1,0 +1,40 @@
+services:
+  sftp:
+    build:
+      context: .
+      dockerfile: Dockerfile.sftp
+    ports:
+      - "2222:22"
+    volumes:
+      - ./configs/sshd_config:/etc/ssh/sshd_config
+      - ./data/sftp:/home/sftpuser/uploads
+    networks:
+      - transfer-net
+
+  postfix:
+    build:
+      context: .
+      dockerfile: Dockerfile.postfix
+    ports:
+      - "25:25"
+    volumes:
+      - ./configs/sasl_passwd:/etc/postfix/sasl_passwd
+      - ./scripts/setup_postfix.sh:/setup_postfix.sh
+    command: sh -c "/setup_postfix.sh && postfix start-fg"
+    networks:
+      - transfer-net
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/nginx:/usr/share/nginx/html
+    networks:
+      - transfer-net
+
+networks:
+  transfer-net:
+    driver: bridge

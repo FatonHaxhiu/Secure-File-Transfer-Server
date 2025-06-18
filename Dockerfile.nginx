@@ -1,0 +1,3 @@
+FROM nginx:alpine
+COPY data/nginx /usr/share/nginx/html
+EXPOSE 80
