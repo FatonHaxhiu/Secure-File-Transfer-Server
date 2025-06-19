@@ -1,5 +1,7 @@
 # Secure File Transfer Server with SFTP
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Dockerized secure file transfer server using SFTP, integrated with Nginx for web access to uploaded files and Postfix for email notifications. Designed for secure, controlled file transfer environments, such as security testing or lab setups.
 
 ## ⚠️ Ethical Use Warning
@@ -18,7 +20,7 @@ The Secure File Transfer Server enables secure file transfers for authorized tes
 - Postfix for email notifications.
 - Dockerized for easy deployment.
 - Scanned with Trivy for no high/critical vulnerabilities.
-
+ 
 ## Prerequisites
 - Docker and Docker Compose
 - WSL2 (Windows) or Linux environment
@@ -31,3 +33,6 @@ The Secure File Transfer Server enables secure file transfers for authorized tes
    ```bash
    git clone https://github.com/FatonHaxhiu/Secure-File-Transfer-Server.git
    cd Secure-File-Transfer-Server
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
